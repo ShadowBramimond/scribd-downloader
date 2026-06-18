@@ -1,0 +1,238 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unknown </title></head><body>
+<p align="center">
+  <img src="scribd-1.svg" alt="Scribd" width="200"/>
+</p>
+
+<h1 align="center">Scribd Downloader</h1>
+
+<p align="center">
+  <b>Download Scribd documents as PDF for free - Fast, automated, and runs in background!</b>
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/downloads/">
+    <img src="https://img.shields.io/badge/Python-3.7+-blue?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python 3.7+"/>
+  </a>
+  <a href="https://pypi.org/project/selenium/">
+    <img src="https://img.shields.io/badge/Selenium-4.0+-green?style=for-the-badge&amp;logo=selenium&amp;logoColor=white" alt="Selenium 4.0+"/>
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge" alt="MIT License"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://buymeacoffee.com/mrsami">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&amp;logo=buy-me-a-coffee&amp;logoColor=black" alt="Buy Me A Coffee"/>
+  </a>
+  <a href="https://github.com/sponsors/themrsami">
+    <img src="https://img.shields.io/badge/Sponsor-ea4aaa?style=for-the-badge&amp;logo=github-sponsors&amp;logoColor=white" alt="GitHub Sponsors"/>
+  </a>
+  <a href="https://github.com/themrsami/scribd-downloader/stargazers">
+    <img src="https://img.shields.io/github/stars/themrsami/scribd-downloader?style=for-the-badge&amp;logo=github" alt="GitHub Stars"/>
+  </a>
+</p>
+
+<hr/>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>One-click download</strong> - Just paste the Scribd URL and get your PDF</li>
+<li><strong>Supports both Scribd URL styles</strong> - Works with <code>/document/...</code> and legacy <code>/doc/...</code> links</li>
+<li><strong>Runs in background</strong> - Headless Chrome, no browser window pops up</li>
+<li><strong>Fast processing</strong> - Optimized scrolling and minimal wait times</li>
+<li><strong>Clean PDFs</strong> - No cookie banners, toolbars, or watermarks</li>
+<li><strong>Large file friendly</strong> - Uses a longer ChromeDriver timeout and streamed PDF export for big image-based documents</li>
+<li><strong>Better math rendering</strong> - Waits for fonts and render stability before printing, and preserves Scribd layout classes needed by equations/SVG</li>
+<li><strong>Better pagination</strong> - Uses Scribd's real page wrappers to avoid extra trailing pages</li>
+<li><strong>Dynamic page size</strong> - Detects the rendered Scribd page size instead of forcing one fixed sheet size</li>
+<li><strong>Auto filename</strong> - PDF named after the document URL automatically</li>
+<li><strong>No login required</strong> - Works without Scribd account</li>
+</ul>
+<hr/>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.7 or higher</li>
+<li>Google Chrome browser installed</li>
+<li>Chrome WebDriver (auto-managed by Selenium)</li>
+</ul>
+<hr/>
+<h2 id="installation">Installation</h2>
+<ol>
+<li>
+<p><strong>Clone the repository</strong>
+   <code>bash
+   git clone https://github.com/themrsami/scribd-downloader.git
+   cd scribd-downloader</code></p>
+</li>
+<li>
+<p><strong>Install dependencies</strong>
+   <code>bash
+   pip install -r requirements.txt</code></p>
+</li>
+</ol>
+<hr/>
+<h2 id="usage">Usage</h2>
+<ol>
+<li>
+<p><strong>Run the script</strong>
+   <code>bash
+   python scribd-downloader.py</code></p>
+</li>
+<li>
+<p><strong>Paste the Scribd document URL</strong> when prompted:
+   <code>Input link Scribd: https://www.scribd.com/document/123456789/Document-Title</code></p>
+</li>
+</ol>
+<p>Legacy Scribd URLs also work:
+   <code>Input link Scribd: https://www.scribd.com/doc/123456789/Document-Title</code></p>
+<ol>
+<li><strong>Wait for the download</strong> - The script will:</li>
+<li>Open the document in headless Chrome</li>
+<li>Scroll through all pages to load content</li>
+<li>Remove unwanted elements (toolbars, cookie banners)</li>
+<li>
+<p>Save as PDF in the current directory</p>
+</li>
+<li>
+<p><strong>Done!</strong> Your PDF will be saved with the document name from the URL.</p>
+</li>
+</ol>
+<hr/>
+<h2 id="example-output">Example Output</h2>
+<p>```text
+$ python scribd-downloader.py
+Input link Scribd: https://www.scribd.com/document/903361807/WorkdaySimpleIntegrations-EIB-31v2</p>
+<p>Link embed: https://www.scribd.com/embeds/903361807/content
+Output filename: WorkdaySimpleIntegrations-EIB-31v2.pdf</p>
+<p>Starting Chrome browser...
+Cookie dialogs hidden.
+Found 316 pages, scrolling...
+  Scrolled 10/316 pages...
+  Scrolled 20/316 pages...
+  ...
+  Detected 617 pages after lazy loading, continuing...
+All 617 pages loaded.
+Top toolbar removed.
+Bottom toolbar removed.
+Adjusted 1 scroll containers for print.
+Print CSS injected.
+Render settle reached its time budget; continuing with best effort.</p>
+<p>Saving PDF as: WorkdaySimpleIntegrations-EIB-31v2.pdf
+  Page size: 10.44" x 13.50" (from .outer_page)
+  Margins: None
+  Headers/Footers: Disabled
+  ChromeDriver command timeout: 600s
+PDF saved successfully to: C:\Users...\WorkdaySimpleIntegrations-EIB-31v2.pdf
+Browser closed.
+```</p>
+<hr/>
+<h2 id="pdf-settings">PDF Settings</h2>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page Size</td>
+<td>Detected dynamically from Scribd's rendered page</td>
+</tr>
+<tr>
+<td>Margins</td>
+<td>None (0)</td>
+</tr>
+<tr>
+<td>Headers/Footers</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>Background Graphics</td>
+<td>Enabled</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="how-it-works">How It Works</h2>
+<ol>
+<li><strong>URL Conversion</strong> - Converts Scribd document URL to embeddable format</li>
+<li><strong>Headless Browser</strong> - Opens Chrome in background (invisible)</li>
+<li><strong>Page Loading</strong> - Scrolls through all pages to trigger lazy-loading</li>
+<li><strong>Cleanup</strong> - Removes toolbars, cookie banners, and overlays while preserving Scribd layout classes</li>
+<li><strong>Render Stabilization</strong> - Waits for fonts, images, and page layout to settle before printing</li>
+<li><strong>Dynamic PDF Generation</strong> - Detects the rendered page size and uses Chrome DevTools Protocol to generate the PDF directly</li>
+<li><strong>Auto Close</strong> - Browser closes automatically after saving</li>
+</ol>
+<hr/>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="chromedriver-not-found-error">"ChromeDriver not found" error</h3>
+<p>The script uses Selenium Manager to auto-download ChromeDriver. If you face issues:
+<code>bash
+pip install --upgrade selenium</code></p>
+<h3 id="pdf-not-saving">PDF not saving</h3>
+<ul>
+<li>Ensure you have write permissions in the current directory</li>
+<li>Check if the Scribd URL is valid and accessible</li>
+<li>For very large documents, increase <code>SCRIBD_CDP_TIMEOUT</code> (default: <code>600</code>)</li>
+</ul>
+<h3 id="page-counter-looks-too-high-while-scrolling">Page counter looks too high while scrolling</h3>
+<ul>
+<li>Scribd creates extra internal page elements while lazy-loading</li>
+<li>The scrolling progress is only a loading indicator and can be higher than the final PDF page count</li>
+</ul>
+<h3 id="blank-pages-in-pdf">Blank pages in PDF</h3>
+<ul>
+<li>Some documents may have DRM protection</li>
+<li>Try increasing <code>SCRIBD_SCROLL_DELAY</code> if pages are not loading completely</li>
+<li>If a document still renders incorrectly, try visible mode with <code>SCRIBD_HEADLESS=0</code></li>
+</ul>
+<h3 id="large-image-heavy-or-math-heavy-documents">Large, image-heavy, or math-heavy documents</h3>
+<p>You can tune the export with environment variables:</p>
+<p><code>powershell
+$env:SCRIBD_CDP_TIMEOUT="900"
+$env:SCRIBD_RENDER_SETTLE_TIMEOUT="45"
+$env:SCRIBD_SCROLL_DELAY="0.2"
+python scribd-downloader.py</code></p>
+<p>Useful variables:</p>
+<ul>
+<li><code>SCRIBD_CDP_TIMEOUT</code> - ChromeDriver command timeout in seconds for <code>Page.printToPDF</code></li>
+<li><code>SCRIBD_RENDER_SETTLE_TIMEOUT</code> - Maximum time to wait for fonts/images/layout to settle before exporting</li>
+<li><code>SCRIBD_SCROLL_DELAY</code> - Delay between page scrolls when forcing lazy-loaded pages to render</li>
+<li><code>SCRIBD_PDF_STREAM_CHUNK_SIZE</code> - Chunk size used when reading a streamed PDF response from Chrome</li>
+<li><code>SCRIBD_HEADLESS=0</code> - Run with a visible browser when debugging rendering issues locally</li>
+</ul>
+<hr/>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! Feel free to:</p>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+<li>Commit your changes (<code>git commit -m 'Add amazing feature'</code>)</li>
+<li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<hr/>
+<h2 id="support-the-project">Support the Project</h2>
+<p>If you find this tool useful, consider supporting its development:</p>
+<p align="center">
+  <a href="https://buymeacoffee.com/mrsami">
+    <img src="buymeacoffee-1.svg" alt="Buy Me A Coffee" width="40" height="40"/>
+  </a>
+</p>
+
+<hr/>
+<h2 id="license">License</h2>
+<p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
+<hr/>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This tool is for educational purposes only. Please respect copyright laws and Scribd's Terms of Service. Only download documents you have the right to access.</p>
+<hr/>
+<p align="center">
+  Made with ������ by <a href="https://github.com/themrsami">Usama Nazir</a>
+</p>
+
+<p align="center">
+  If you find this useful, please consider giving it a ���
+</p>
+</body></html>
